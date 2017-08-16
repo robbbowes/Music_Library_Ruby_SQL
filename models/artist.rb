@@ -30,7 +30,9 @@ class Artist
     sql = 'SELECT * FROM artists;'
     results = SqlRunner.run(sql)
 
-    artists = results.map {|artist_hash| Artist.new(artist_hash)}
+    artists = results.map do |artist_hash|
+      Artist.new(artist_hash)
+    end
 
     return artists
   end
