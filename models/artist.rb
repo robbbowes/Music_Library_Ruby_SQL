@@ -44,4 +44,22 @@ class Artist
     db.close()
   end
 
+  def album
+    sql = 'SELECT * FROM albums WHERE id = $1;'
+    results_array = SqlRunner.run(sql, [@album_id])
+    album = results_array.map {|album_hash| Album.new(album_hash)}
+    return album
+  end
+
+  def update
+    sql = 'UPDATE artists SET (
+      name
+      ) = (
+      $1
+      )
+      WHERE id = $2;'
+    values = [@name, @id]
+    results = SqlRunner.run(sql, values)
+  end
+
 end
